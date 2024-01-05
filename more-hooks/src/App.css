@@ -26,3 +26,7 @@ input{
   width: 200px;
   background-color: rgb(234, 234, 234);
 }
+
+.focus-btn{
+  margin-top: 50px;
+}

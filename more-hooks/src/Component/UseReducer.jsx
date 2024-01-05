@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState , useRef} from 'react';
 
 const initialState = {
   data: [],
@@ -33,6 +33,8 @@ const reducer = (state, action) => {
 };
 
 export default function Useref() {
+
+  const inputRef = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const toggleContent = (index) => {
@@ -48,9 +50,16 @@ export default function Useref() {
     }
   }
 
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   return (
     <div>
-      <input type="text" onKeyDown={(e) => storeInput(e)} />
+      
+      <input type="text" onKeyDown={(e) => storeInput(e)} ref={inputRef}/>
       {state.showBox ? (
         state.data.map((item, index) => (
           <div key={index} className="box">
@@ -66,10 +75,15 @@ export default function Useref() {
               Toggle
             </button>
           </div>
+          
         ))
       ) : (
         ''
       )}
+
+      <button className="focus-btn" onClick={focusInput}>
+        Get back writing
+      </button>
     </div>
   );
 }
