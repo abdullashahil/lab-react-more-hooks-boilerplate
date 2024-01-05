@@ -1,4 +1,4 @@
-import React, { useReducer, useState , useRef} from 'react';
+import React, { useReducer, useRef } from 'react';
 
 const initialState = {
   data: [],
@@ -33,7 +33,6 @@ const reducer = (state, action) => {
 };
 
 export default function Useref() {
-
   const inputRef = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -58,32 +57,28 @@ export default function Useref() {
 
   return (
     <div>
-      
-      <input type="text" onKeyDown={(e) => storeInput(e)} ref={inputRef}/>
+      <input type="text" onKeyDown={(e) => storeInput(e)} ref={inputRef} />
       {state.showBox ? (
-        state.data.map((item, index) => (
-          <div key={index} className="box">
-            {item.hideContent ? (
-              <h2 className="text">The content is hidden</h2>
-            ) : (
-              <h2 className="text">{item.val}</h2>
-            )}
-            <button
-              className="toggle"
-              onClick={() => toggleContent(index)}
-            >
-              Toggle
-            </button>
-          </div>
-          
-        ))
+        <>
+          {state.data.map((item, index) => (
+            <div key={index} className="box">
+              {item.hideContent ? (
+                <h2 className="text">The content is hidden</h2>
+              ) : (
+                <h2 className="text">{item.val}</h2>
+              )}
+              <button className="toggle" onClick={() => toggleContent(index)}>
+                Toggle
+              </button>
+            </div>
+          ))}
+          <button className="focus-btn" onClick={focusInput}>
+            Get back writing
+          </button>
+        </>
       ) : (
         ''
       )}
-
-      <button className="focus-btn" onClick={focusInput}>
-        Get back writing
-      </button>
     </div>
   );
-}
+      }
